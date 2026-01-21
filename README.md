@@ -2,60 +2,157 @@
 Python Scraping Script es una herramienta ligera de recolección OSINT orientada a ciberseguridad. Introduces una URL y el script explora el dominio para localizar y descargar archivos públicos expuestos, incluyendo PDFs, imágenes y audios (y otros recursos estáticos habituales).
 
 
-# Python Scraping Script (OSINT File Collector)
+# Python Scraping Script — Document Collector (OSINT / Ciberseguridad)
 
-Herramienta en Python orientada a **ciberseguridad / OSINT** que, a partir de una URL, **recorre el dominio** y **extrae archivos públicos** (PDFs, imágenes, audios y otros recursos) para ayudarte a identificar exposición accidental de información.
+Script en Python orientado a **ciberseguridad/OSINT**: introduces una URL y el script **rastrea el dominio** para localizar y descargar **todos los documentos públicos** que encuentre, incluyendo:
 
-> Uso típico: reconocimiento pasivo/activo controlado, inventariado de recursos públicos, auditoría rápida de contenido indexable y recopilación de evidencias.
+- **PDF** (`.pdf`)
+- **Word** (`.doc`, `.docx`)
+- **Documentos** (otros formatos configurables: `.txt`, `.rtf`, `.odt`, etc.)
 
----
-
-## Características
-
-- ✅ Entrada simple: **una URL** y listo.
-- ✅ Descarga y organiza automáticamente:
-  - **PDFs** (`.pdf`)
-  - **Imágenes** (`.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.svg`)
-  - **Audios** (`.mp3`, `.wav`, `.ogg`, `.m4a`, `.flac`)
-  - (Opcional) otros estáticos: `.zip`, `.rar`, `.docx`, etc.
-- ✅ Filtrado por **mismo dominio** (evita salir a terceros).
-- ✅ Evita duplicados mediante hashing / control por URL.
-- ✅ Estructura de salida limpia y práctica para análisis.
-- ✅ Enfoque “day-to-day”: rápido, directo y sin complicaciones.
+El objetivo es facilitar el reconocimiento y la auditoría de exposición: recopilar evidencias, revisar metadatos y detectar publicación accidental de información.
 
 ---
 
-## Casos de uso en ciberseguridad
+## Qué hace exactamente
 
-- OSINT: localizar **documentos públicos** y media expuesta.
-- Auditorías: detectar **publicación involuntaria** de PDFs con metadatos sensibles.
-- Pentesting (fase de reconocimiento): inventario de endpoints y recursos estáticos.
-- Blue Team: verificación de **higiene de publicación** en dominios corporativos.
+1. Recibe una URL inicial (seed).
+2. Rastrea enlaces internos (mismo dominio) hasta agotar el alcance definido.
+3. Identifica recursos descargables por extensión o por cabeceras HTTP.
+4. Descarga y organiza todos los archivos detectados.
+5. Genera un log y, si lo implementas, un reporte (CSV/JSON) para evidencias.
 
----
-
-## Requisitos
-
-- Python 3.10+ recomendado
-
-Dependencias típicas (según implementación):
-- `requests`
-- `beautifulsoup4`
-- `lxml` (opcional, recomendado)
-- `tqdm` (opcional)
+> El rango temporal (por ejemplo “del 2000 hasta hoy”) no es un filtro: el script descarga cualquier recurso público accesible, independientemente de su antigüedad.
 
 ---
 
-## Instalación
+## Salida en el Escritorio (automática)
 
-```bash
-git clone https://github.com/tu-usuario/tu-repo.git
-cd tu-repo
-pip install -r requirements.txt
+Por defecto, el script crea una carpeta en tu Escritorio:
 
+- Windows: `C:\Users\<usuario>\Desktop\scrape_<dominio>_<fecha>`
+- Linux: `~/Desktop/scrape_<dominio>_<fecha>`
+- macOS: `~/Desktop/scrape_<dominio>_<fecha>`
 
-## USO
+Dentro, separa por tipo:
 
-Ejemplo básico:
+# Python Scraping Script — Document Collector (OSINT / Ciberseguridad)
+
+Script en Python orientado a **ciberseguridad/OSINT**: introduces una URL y el script **rastrea el dominio** para localizar y descargar **todos los documentos públicos** que encuentre, incluyendo:
+
+- **PDF** (`.pdf`)
+- **Word** (`.doc`, `.docx`)
+- **Documentos** (otros formatos configurables: `.txt`, `.rtf`, `.odt`, etc.)
+
+El objetivo es facilitar el reconocimiento y la auditoría de exposición: recopilar evidencias, revisar metadatos y detectar publicación accidental de información.
+
+---
+
+## Qué hace exactamente
+
+1. Recibe una URL inicial (seed).
+2. Rastrea enlaces internos (mismo dominio) hasta agotar el alcance definido.
+3. Identifica recursos descargables por extensión o por cabeceras HTTP.
+4. Descarga y organiza todos los archivos detectados.
+5. Genera un log y, si lo implementas, un reporte (CSV/JSON) para evidencias.
+
+> El rango temporal (por ejemplo “del 2000 hasta hoy”) no es un filtro: el script descarga cualquier recurso público accesible, independientemente de su antigüedad.
+
+---
+
+## Salida en el Escritorio (automática)
+
+Por defecto, el script crea una carpeta en tu Escritorio:
+
+- Windows: `C:\Users\<usuario>\Desktop\scrape_<dominio>_<fecha>`
+- Linux: `~/Desktop/scrape_<dominio>_<fecha>`
+- macOS: `~/Desktop/scrape_<dominio>_<fecha>`
+
+Dentro, separa por tipo:
+
+# Python Scraping Script — Document Collector (OSINT / Ciberseguridad)
+
+Script en Python orientado a **ciberseguridad/OSINT**: introduces una URL y el script **rastrea el dominio** para localizar y descargar **todos los documentos públicos** que encuentre, incluyendo:
+
+- **PDF** (`.pdf`)
+- **Word** (`.doc`, `.docx`)
+- **Documentos** (otros formatos configurables: `.txt`, `.rtf`, `.odt`, etc.)
+
+El objetivo es facilitar el reconocimiento y la auditoría de exposición: recopilar evidencias, revisar metadatos y detectar publicación accidental de información.
+
+---
+
+## Qué hace exactamente
+
+1. Recibe una URL inicial (seed).
+2. Rastrea enlaces internos (mismo dominio) hasta agotar el alcance definido.
+3. Identifica recursos descargables por extensión o por cabeceras HTTP.
+4. Descarga y organiza todos los archivos detectados.
+5. Genera un log y, si lo implementas, un reporte (CSV/JSON) para evidencias.
+
+> El rango temporal (por ejemplo “del 2000 hasta hoy”) no es un filtro: el script descarga cualquier recurso público accesible, independientemente de su antigüedad.
+
+---
+
+## Salida en el Escritorio (automática)
+
+Por defecto, el script crea una carpeta en tu Escritorio:
+
+- Windows: `C:\Users\<usuario>\Desktop\scrape_<dominio>_<fecha>`
+- Linux: `~/Desktop/scrape_<dominio>_<fecha>`
+- macOS: `~/Desktop/scrape_<dominio>_<fecha>`
+
+Dentro, separa por tipo:
+
+# Python Scraping Script — Document Collector (OSINT / Ciberseguridad)
+
+Script en Python orientado a **ciberseguridad/OSINT**: introduces una URL y el script **rastrea el dominio** para localizar y descargar **todos los documentos públicos** que encuentre, incluyendo:
+
+- **PDF** (`.pdf`)
+- **Word** (`.doc`, `.docx`)
+- **Documentos** (otros formatos configurables: `.txt`, `.rtf`, `.odt`, etc.)
+
+El objetivo es facilitar el reconocimiento y la auditoría de exposición: recopilar evidencias, revisar metadatos y detectar publicación accidental de información.
+
+---
+
+## Qué hace exactamente
+
+1. Recibe una URL inicial (seed).
+2. Rastrea enlaces internos (mismo dominio) hasta agotar el alcance definido.
+3. Identifica recursos descargables por extensión o por cabeceras HTTP.
+4. Descarga y organiza todos los archivos detectados.
+5. Genera un log y, si lo implementas, un reporte (CSV/JSON) para evidencias.
+
+> El rango temporal (por ejemplo “del 2000 hasta hoy”) no es un filtro: el script descarga cualquier recurso público accesible, independientemente de su antigüedad.
+
+---
+
+## Salida en el Escritorio (automática)
+
+Por defecto, el script crea una carpeta en tu Escritorio:
+
+- Windows: `C:\Users\<usuario>\Desktop\scrape_<dominio>_<fecha>`
+- Linux: `~/Desktop/scrape_<dominio>_<fecha>`
+- macOS: `~/Desktop/scrape_<dominio>_<fecha>`
+
+Dentro, separa por tipo:
+
+Uso
+
+Básico:
 
 python scraper.py --url "https://example.com"
+
+
+“Scrapear todo”: limitaciones reales (importante)
+
+El script puede descargar todo lo que sea públicamente accesible, pero existen límites inevitables:
+
+No puede acceder a contenido que requiera login, tokens o APIs privadas.
+
+No puede descubrir archivos no enlazados (a menos que añadas enumeración de rutas/wordlists).
+
+Puede haber bloqueos por WAF, rate-limit, CAPTCHA, o permisos del servidor.
+
+En sitios grandes, “todo” puede ser enorme: usa límites si es necesario.
